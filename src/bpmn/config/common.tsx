@@ -27,7 +27,6 @@ const commonProperties: PropertiesMap<FieldDefine> = {
   },
   name: {
     component: ElInput,
-    // prefix: '节点名称',
     placeholder: '节点名称',
     vSlots: {
       prepend: (): JSX.Element => <div>节点名称</div>,
@@ -178,6 +177,7 @@ export const getElementTypeListenerProperties = function (options: {
           content: [{ required: true, message: '执行内容不能为空' }],
         },
         getValue: (businessObject: ModdleElement): Array<any> => {
+          console.log('getValue',businessObject)
           const listenerTagName = taskTags.includes(businessObject.$type)
             ? 'activiti:TaskListener'
             : 'activiti:ExecutionListener';

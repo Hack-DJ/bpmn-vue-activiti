@@ -53,15 +53,20 @@ export default defineComponent({
 
           if (define && predicate(define, toRaw(props.modelValue))) {
             const bindData = dataBindTransformer(key, define);
+
             //组件不能是代理对象，这里直接用目标对象
             const Component = toRaw(define.component);
 
             watch(
               () => bindData.value,
               () => {
-                // state.handingModel[bindData.bindKey] = bindData.value;
+                state.handingModel[bindData.bindKey] = bindData.value;
                 context.emit('update:modelValue', state.handingModel);
 
+                console.log('update:modelValue-newValue', state.handingModel);
+                console.log('update:modelValue-newValue', bindData.value);
+
+                // return false
                 //如果有setValue还是则直接使用独立的setValue
                 if (bindData.setValue) {
                   //setValue有返回值，值进行赋值后执行
